@@ -6,3 +6,8 @@ target/
 .sbtopts
 
 TAGS
+.cache*
+.classpath
+.project
+.settings
+pom.xml
