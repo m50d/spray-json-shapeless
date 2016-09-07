@@ -3,6 +3,7 @@ package fommil.sjs
 import org.scalatest._
 import spray.json._
 import shapeless._
+import syntax.singleton._
 import java.util.UUID
 
 // Example domain models used in the tests. Note that the domain model
@@ -211,6 +212,11 @@ class FamilyFormatsSpec extends FlatSpec with Matchers
     roundtrip(Bar(): SimpleTrait, """{"type":"Bar"}""")
     roundtrip(Baz: SimpleTrait, """{"type":"Baz"}""")
     roundtrip(Fuzz: SimpleTrait, """{"type":"Fuzz"}""")
+  }
+  
+  it should "support shapeless records" in {
+    val record = ("s" ->> "Foo") :: HNil
+    roundtrip(record, """{"s":"Foo"}""")
   }
 
   it should "fail when missing required coproduct disambiguators" in {
